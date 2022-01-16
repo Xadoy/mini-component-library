@@ -23,14 +23,22 @@ const ProgressBar = ({ value, size }) => {
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <Bar value={value} size={size} />
+      <VisuallyHidden>{value}%</VisuallyHidden>
+      <BarWrapper>
+        <Bar value={value} size={size} />
+      </BarWrapper>
     </Wrapper>
   );
 };
-const BarBase = styled.div`
+
+const BarWrapper = styled.div`
   border-radius: 4px;
-  border-top-right-radius: ${({ value }) => (value === 100 ? undefined : 0)};
-  border-bottom-right-radius: ${({ value }) => (value === 100 ? undefined : 0)};
+  /* to round the edges of Bar */
+  overflow: hidden;
+`;
+const BarBase = styled.div`
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 
   width: ${(p) => p.value}%;
   background-color: ${COLORS.primary};
